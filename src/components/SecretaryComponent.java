@@ -3,13 +3,13 @@
  CSI 340 Final Project: Electronic Secretary
  */
 
-package component;
+package components;
 
 public abstract class SecretaryComponent{
-    protected title;
-    protected description;
+    protected String title;
+    protected String description;
 
-    public abstract String compose();
+//    public abstract String compose();
 
     public void addElement(SecretaryComponent element) {
         throw new UnsupportedOperationException("This Element cannot have child nodes.");
@@ -27,7 +27,7 @@ public abstract class SecretaryComponent{
         return description;
     }
 
-    public void setDescription(String title){
+    public void setDescription(String description){
         this.description = description;
     }
 

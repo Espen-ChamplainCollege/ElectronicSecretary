@@ -3,7 +3,9 @@
  CSI 340 Final Project: Electronic Secretary
  */
 
-package command;
+package commands;
+
+import main.*;
 
 public class RemoveNote implements Command {
     ElectronicSecretary secretary;
