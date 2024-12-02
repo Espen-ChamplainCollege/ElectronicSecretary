@@ -3,7 +3,7 @@
  CSI 340 Final Project: Electronic Secretary
  */
 
-package command;
+package commands;
 
 public interface Command {
     public void execute();

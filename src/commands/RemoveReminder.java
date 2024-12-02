@@ -2,8 +2,9 @@
  Ileigh Aube, Alexander Mayo, Espen Wold
  CSI 340 Final Project: Electronic Secretary
  */
+package commands;
 
-package command;
+import main.*;
 
 public class RemoveReminder implements Command {
     ElectronicSecretary secretary;

@@ -3,12 +3,18 @@
  CSI 340 Final Project: Electronic Secretary
  */
 
-package component;
+package components;
 
 public class NoteComponent extends SecretaryComponent{
-    public String compose(){
+
+    public NoteComponent(String title, String description){
+        this.title = title;
+        this.description = description;
+    }
+
+//    public String compose(){
         /*
          Figure out how to compose here
          */
-    }
+//    }
 }
