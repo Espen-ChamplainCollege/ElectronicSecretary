@@ -15,9 +15,6 @@ public class AddNote implements Command {
     }
 
     public void execute(){
-        /*
-         Get note string from user input here
-         */
         Scanner temp = new Scanner(System.in);
         System.out.print("Note Title: ");
         String title = temp.nextLine();
