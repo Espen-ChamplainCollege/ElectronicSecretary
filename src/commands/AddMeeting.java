@@ -50,7 +50,31 @@ public class AddMeeting extends AddReminder {
             }
         }
 
+        String answer;
+
+        while(true){
+            System.out.println("Do you want to add this meeting to an existing item? (yes/no): ");
+            answer = temp.nextLine();
+            if (answer.toLowerCase() == "yes"){
+                System.out.println("Enter the title of the item you want to add this meeting to: ");
+                String existingComponentTitle = temp.nextLine();
+                try {
+                    secretary.addMeeting(title, description, people, date, time, existingComponentTitle);
+                    break;
+                }
+                catch (ComponentNotFoundException e){
+                    System.out.println("Item not found.");
+                }
+                catch (UnsupportedOperationException e){
+                    System.out.println("Notes cannot be added to.");
+                }
+            }
+            else if (answer.toLowerCase() == "no"){
+                secretary.addReminder(title, description, people, date, time);
+                break;
+            }
+        }
+        System.out.println("Meeting added successfully.");
         temp.close();
-        secretary.addReminder(title, description, people, date, time);
     }
 }

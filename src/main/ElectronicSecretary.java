@@ -11,39 +11,83 @@ import java.util.List;
 
 import components.*;
 
+public class ComponentNotTopLevelException extends Exception {
+    public ComponentNotTopLevelException(){
+        super("Only top level components can be removed");
+    }
+}
+
 public class ElectronicSecretary {
-    List<SecretaryComponent> secretaryElements;
+    List<SecretaryComponent> secretaryComponents;
+
+    private SecretaryComponent findComponent(String title){
+        for (SecretaryComponent component : secretaryComponents){
+            if (component.getTitle().toLowerCase() == title.toLowerCase()){
+                return component;
+            }
+            try {
+                return component.findComponent(title);
+            }
+            catch (ComponentNotFoundException e){
+                continue;
+            }
+        }
+        throw new ComponentNotFoundException();
+    }
 
     public void addReminder(String title, String description, LocalDate date, LocalTime time){
         /*
-         addReminder function for basic reminders and tasks
+         basic add function for reminders and tasks
          */
-        SecretaryComponent secretaryComponent = new ReminderComponent(title, description, date, time);
-        secretaryElements.add(secretaryComponent);
+        secretaryComponents.add(new ReminderComponent(title, description, date, time));
     }
 
-    public void addReminder(String title, String description, List<String> people, LocalDate date, LocalTime time){
+    public void addMeeting(String title, String description, List<String> people, LocalDate date, LocalTime time){
         /*
-         addReminder function for meetings
+         basic add function for meetings
          */
-        SecretaryComponent secretaryComponent = new MeetingComponent(title, description, people, date, time);
-        secretaryElements.add(secretaryComponent);
+        secretaryComponents.add(new MeetingComponent(title, description, people, date, time));
     }
 
     public void addNote(String title, String description){
-        SecretaryComponent secretaryComponent = new NoteComponent(title, description);
-        secretaryElements.add(secretaryComponent);
+        /*
+         basic add function for notes
+         */
+        secretaryComponents.add(new NoteComponent(title, description));
     }
 
-    /*
-    public void removeReminder(???){
-
+    public void addReminder(String title, String description, LocalDate date, LocalTime time, String componentTitle){
+        /*
+         add function for adding reminders and tasks to existing components
+         */
+        SecretaryComponent component = findComponent(componentTitle);
+        component.add(new ReminderComponent(title, description, date, time));
     }
 
-    public void removeNote(???){
+    public void addMeeting(String title, String description, List<String> people, LocalDate date, LocalTime time, String componentTitle){
+        /*
+         add function for adding meetings to existing components
+         */
+        SecretaryComponent component = findComponent(componentTitle);
+        component.add(new ReminderComponent(title, description, people, date, time));
+    }
+
+    public void addNote(String title, String description, String componentTitle){
+        /*
+         add function for adding notes to existing components
+         */
+        SecretaryComponent component = findComponent(componentTitle);
+        component.add(new NoteComponent(title, description));
+    }
+
+    public void removeComponent(String title){
+        boolean componentRemoved = secretaryComponents.remove(findComponent(title));
+
+        if (!componentRemoved){
+            throw new ComponentNotTopLevelException();
+        }
 
     }
-     */
 
     public void printInfo(String untilDate){
         /*

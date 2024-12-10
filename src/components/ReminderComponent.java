@@ -7,8 +7,13 @@ package components;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
+public class ComponentNotFoundException extends Exception {
+    public ComponentNotFoundException(){
+        super("Component not found.");
+    }
+}
 
 public class ReminderComponent extends SecretaryComponent{
     protected LocalDate date;
@@ -23,29 +28,45 @@ public class ReminderComponent extends SecretaryComponent{
         this.time = time;
     }
 
+    @Override
     public void addComponent(SecretaryComponent component){
         components.add(component);
     }
 
+    @Override
+    public void removeComponent(SecretaryComponent component){
+        components.remove(component);
+    }
+
+    @Override
     public SecretaryComponent findComponent(String title){
-        for(int i = 0; i < components.size(); i++){
-            if(components.get(i).getTitle() == title){
-                return components.get(i);
+        for (SecretaryComponent component: components){
+            if (component.getTitle().toLowerCase() == title.toLowerCase()){
+                return component;
+            }
+            try {
+                return component.findComponent(title);
+            }
+            catch (Exception e){
+                continue;
             }
         }
-        System.out.println("Error. Component not found");
-        return null;
+        throw new ComponentNotFoundException ();
     }
+
     public String compose(){
-        /*
-         Figure out how to compose here
-         */
-        String output = "";
-        output += "Title: " + this.title + "\n";
-        output += "Description: " + this.description + "\n";
-        output += "Date: " + LocalDateToString() + "\n";
-        output += "Time: " + LocalTimeToString() + "\n";
-        return output;
+        StringBuilder string = new StringBuilder();
+
+        string.append("Title: " + this.title + "\n");
+        string.append("Description: " + this.description + "\n");
+        string.append("Date: " + LocalDateToString() + "\n");
+        string.append("Time: " + LocalTimeToString() + "\n");
+
+        for (SecretaryComponent component: components){
+            string.append(component.compose());
+        }
+
+        return string.toString();
     }
 
     protected String LocalDateToString(){

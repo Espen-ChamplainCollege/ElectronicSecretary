@@ -6,7 +6,6 @@
 package commands;
 
 import main.*;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class RemoveComponent implements Command {
@@ -16,24 +15,21 @@ public class RemoveComponent implements Command {
         this.secretary = secretary;
     }
 
-    /*
     public void execute(){
-        secretary.condensedPrint(true);
         Scanner temp = new Scanner(System.in);
-        while(true){
-            try {
-                System.out.print("Select an item: ");
-                componentIdx = temp.nextInt() - 1;
-                secretary.printComponent(componentIdx, true);
-                System.out.print("Select an item: ");
-            }
-            catch(InputMismatchException e){
-                System.out.println("ERROR! Invalid Input. Please input an integer.");
-            }
-            catch(ArrayIndexOutOfBoundsException e){
-                System.out.println("ERROR! Invalid Integer. Please input an integer from the options available.");
-            }
+        System.out.print("Title of Item to Remove: ");
+        String title = temp.nextLine();
+        temp.close();
+
+        try {
+            secretary.removeComponent(title);
+            System.out.println("Item successfully removed.");
+        }
+        catch (ComponentNotFoundException e){
+            System.out.println("Item not found.");
+        }
+        catch (ComponentNotTopLevelException e){
+            System.out.println("Item is not a parent, child items cannot be removed.");
         }
     }
-     */
 }

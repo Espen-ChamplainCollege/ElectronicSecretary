@@ -21,7 +21,6 @@ public class AddTask extends AddReminder {
         /*
          Same functionality as AddReminder with different user prompts
          */
-        
         Scanner temp = new Scanner(System.in);
         System.out.print("Title of Task: ");
         String title = temp.nextLine();
@@ -33,8 +32,31 @@ public class AddTask extends AddReminder {
         LocalDate date = getDate(temp);
         LocalTime time = getTime(temp);
 
+        String answer;
+
+        while(true){
+            System.out.println("Do you want to add this task to an existing item? (yes/no): ");
+            answer = temp.nextLine();
+            if (answer.toLowerCase() == "yes"){
+                System.out.println("Enter the title of the item you want to add the task to: ");
+                String existingComponentTitle = temp.nextLine();
+                try {
+                    secretary.addReminder(title, description, date, time, existingComponentTitle);
+                    break;
+                }
+                catch (ComponentNotFoundException e){
+                    System.out.println("Item not found.");
+                }
+                catch (UnsupportedOperationException e){
+                    System.out.println("Notes cannot be added to.");
+                }
+            }
+            else if (answer.toLowerCase() == "no"){
+                secretary.addReminder(title, description, date, time);
+                break;
+            }
+        }
+        System.out.println("Task added successfully.");
         temp.close();
-        
-        secretary.addReminder(title, description, date, time);
     }
 }

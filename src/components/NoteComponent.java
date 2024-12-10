@@ -13,9 +13,6 @@ public class NoteComponent extends SecretaryComponent{
     }
 
     public String compose(){
-        /*
-        Figure out how to compose here
-        */
         String output = "";
         output += "Note Title: " + this.title + "\n";
         output += "Description: " + this.description + "\n";

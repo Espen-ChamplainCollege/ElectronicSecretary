@@ -21,7 +21,7 @@ public class AddReminder implements Command {
 
     public void execute(){
         /*
-         Figure out how to get a title, description, date, and time from user input
+         Same functionality as AddReminder with different user prompts
          */
         Scanner temp = new Scanner(System.in);
         System.out.print("Title of Reminder: ");
@@ -33,8 +33,32 @@ public class AddReminder implements Command {
         LocalDate date = getDate(temp);
         LocalTime time = getTime(temp);
 
+        String answer;
+
+        while(true){
+            System.out.println("Do you want to add this reminder to an existing item? (yes/no): ");
+            answer = temp.nextLine();
+            if (answer.toLowerCase() == "yes"){
+                System.out.println("Enter the title of the item you want to add this reminder to: ");
+                String existingComponentTitle = temp.nextLine();
+                try {
+                    secretary.addReminder(title, description, date, time, existingComponentTitle);
+                    break;
+                }
+                catch (ComponentNotFoundException e){
+                    System.out.println("Item not found.");
+                }
+                catch (UnsupportedOperationException e){
+                    System.out.println("Notes cannot be added to.");
+                }
+            }
+            else if (answer.toLowerCase() == "no"){
+                secretary.addReminder(title, description, date, time);
+                break;
+            }
+        }
+        System.out.println("Reminder added successfully.");
         temp.close();
-        secretary.addReminder(title, description, date, time);
     }
 
     protected LocalDate getDate(Scanner temp){

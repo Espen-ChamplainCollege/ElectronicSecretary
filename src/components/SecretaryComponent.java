@@ -11,8 +11,16 @@ public abstract class SecretaryComponent{
 
     public abstract String compose();
 
-    public void addElement(SecretaryComponent element) {
+    public void addComponent(SecretaryComponent element) {
         throw new UnsupportedOperationException("This Element cannot have child nodes.");
+    }
+
+    public void removeComponent(SecretaryComponent element) {
+        throw new UnsupportedOperationException("This Element does not have child nodes.");
+    }
+
+    public void findComponent(SecretaryComponent element) {
+        throw new UnsupportedOperationException("This Element does not have child nodes.");
     }
 
     public String getTitle(){

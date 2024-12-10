@@ -17,21 +17,32 @@ public class MeetingComponent extends ReminderComponent{
         this.people = people;
     }
 
-    
+    @Override
     public String compose(){
-        //Figure out how to compose here
-        String output = super.compose();
-        output += "People: ";
-        for(int i = 0; i < this.people.size(); i++){
-            output += this.people.get(i);
-            if(i + 1 < this.people.size()){
-                output += ", ";
+        StringBuilder string = new StringBuilder();
+
+        string.append("Title: " + this.title + "\n");
+        string.append("Description: " + this.description + "\n");
+        string.append("Date: " + LocalDateToString() + "\n");
+        string.append("Time: " + LocalTimeToString() + "\n");
+
+        Iterator<String> iterator = people.iterator();
+
+        while (iterator.hasNext()){
+            string.append(iterator.next());
+
+            if (iterator.hasNext()){
+                string.append(", ");
             }
             else{
-                output += "\n";
+                string.append("\n");
             }
         }
-        return output;
+
+        for (SecretaryComponent component: components){
+            string.append(component.compose());
+        }
+
+        return string.toString();
     }
-    
 }
