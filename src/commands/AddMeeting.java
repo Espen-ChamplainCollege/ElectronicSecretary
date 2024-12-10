@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.*;
+import components.*;
 
 public class AddMeeting extends AddReminder {
 
@@ -63,14 +64,14 @@ public class AddMeeting extends AddReminder {
                     break;
                 }
                 catch (ComponentNotFoundException e){
-                    System.out.println("Item not found.");
+                    System.out.println(e.getMessage());
                 }
                 catch (UnsupportedOperationException e){
                     System.out.println("Notes cannot be added to.");
                 }
             }
             else if (answer.toLowerCase() == "no"){
-                secretary.addReminder(title, description, people, date, time);
+                secretary.addMeeting(title, description, people, date, time);
                 break;
             }
         }

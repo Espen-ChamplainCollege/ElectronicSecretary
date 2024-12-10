@@ -12,6 +12,8 @@ import java.time.LocalTime;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import components.ComponentNotFoundException;
+
 public class AddReminder implements Command {
     ElectronicSecretary secretary;
 
@@ -46,7 +48,7 @@ public class AddReminder implements Command {
                     break;
                 }
                 catch (ComponentNotFoundException e){
-                    System.out.println("Item not found.");
+                    System.out.println(e.getMessage());
                 }
                 catch (UnsupportedOperationException e){
                     System.out.println("Notes cannot be added to.");
