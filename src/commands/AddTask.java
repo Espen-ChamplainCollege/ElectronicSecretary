@@ -6,7 +6,7 @@
 package commands;
 
 import main.*;
-import components.*;
+import utilities.*;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -34,11 +34,12 @@ public class AddTask extends AddReminder {
         LocalTime time = getTime(temp);
 
         String answer;
+        String buffer = temp.nextLine();
 
         while(true){
             System.out.println("Do you want to add this task to an existing item? (yes/no): ");
             answer = temp.nextLine();
-            if (answer.toLowerCase() == "yes"){
+            if (answer.toLowerCase().equals("yes")){
                 System.out.println("Enter the title of the item you want to add the task to: ");
                 String existingComponentTitle = temp.nextLine();
                 try {
@@ -52,12 +53,11 @@ public class AddTask extends AddReminder {
                     System.out.println("Notes cannot be added to.");
                 }
             }
-            else if (answer.toLowerCase() == "no"){
+            else if (answer.toLowerCase().equals("no")){
                 secretary.addReminder(title, description, date, time);
                 break;
             }
         }
         System.out.println("Task added successfully.");
-        temp.close();
     }
 }

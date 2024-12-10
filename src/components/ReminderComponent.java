@@ -5,6 +5,8 @@
 
 package components;
 
+import utilities.*;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
@@ -13,7 +15,7 @@ public class ReminderComponent extends SecretaryComponent{
     protected LocalDate date;
     protected LocalTime time;
 
-    protected List<SecretaryComponent> components = new ArrayList<>();
+    protected List<SecretaryComponent> components = new ArrayList<SecretaryComponent>();
 
     public ReminderComponent(String title, String description, LocalDate date, LocalTime time){
         this.title = title;
@@ -34,15 +36,17 @@ public class ReminderComponent extends SecretaryComponent{
 
     @Override
     public SecretaryComponent findComponent(String title) throws ComponentNotFoundException{
-        for (SecretaryComponent component: components){
-            if (component.getTitle().toLowerCase() == title.toLowerCase()){
-                return component;
-            }
-            try {
-                return component.findComponent(title);
-            }
-            catch (Exception e){
-                continue;
+        if (!components.isEmpty()){
+            for (SecretaryComponent component: components){
+                if (component.getTitle().toLowerCase().equals(title.toLowerCase())){
+                    return component;
+                }
+                try {
+                    return component.findComponent(title);
+                }
+                catch (Exception e){
+                    continue;
+                }
             }
         }
         throw new ComponentNotFoundException();

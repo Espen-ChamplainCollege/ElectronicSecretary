@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.*;
-import components.*;
+import utilities.*;
 
 public class AddMeeting extends AddReminder {
 
@@ -38,12 +38,14 @@ public class AddMeeting extends AddReminder {
         LocalDate date = getDate(temp);
         LocalTime time = getTime(temp);
 
+        String buffer = temp.nextLine();
+
         //People
         List<String> people = new ArrayList<String>();
         System.out.println("Who will be at the meeting? Type 'done' to continue");
         while(true){
             String nextLine = temp.nextLine();
-            if(nextLine.toLowerCase() == "done"){
+            if(nextLine.toLowerCase().equals("done")){
                 break;
             }
             else{
@@ -56,7 +58,7 @@ public class AddMeeting extends AddReminder {
         while(true){
             System.out.println("Do you want to add this meeting to an existing item? (yes/no): ");
             answer = temp.nextLine();
-            if (answer.toLowerCase() == "yes"){
+            if (answer.toLowerCase().equals("yes")){
                 System.out.println("Enter the title of the item you want to add this meeting to: ");
                 String existingComponentTitle = temp.nextLine();
                 try {
@@ -70,12 +72,11 @@ public class AddMeeting extends AddReminder {
                     System.out.println("Notes cannot be added to.");
                 }
             }
-            else if (answer.toLowerCase() == "no"){
+            else if (answer.toLowerCase().equals("no")){
                 secretary.addMeeting(title, description, people, date, time);
                 break;
             }
         }
         System.out.println("Meeting added successfully.");
-        temp.close();
     }
 }

@@ -1,4 +1,4 @@
-package main;
+package utilities;
 
 public class ComponentNotTopLevelException extends Exception {
     public ComponentNotTopLevelException(){

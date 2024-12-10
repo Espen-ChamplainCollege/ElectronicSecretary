@@ -6,7 +6,7 @@
 package commands;
 
 import main.*;
-import components.*;
+import utilities.*;
 import java.util.Scanner;
 
 public class RemoveComponent implements Command {
@@ -20,7 +20,6 @@ public class RemoveComponent implements Command {
         Scanner temp = new Scanner(System.in);
         System.out.print("Title of Item to Remove: ");
         String title = temp.nextLine();
-        temp.close();
 
         try {
             secretary.removeComponent(title);

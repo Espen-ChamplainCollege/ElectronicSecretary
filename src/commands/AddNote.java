@@ -5,7 +5,7 @@
 package commands;
 
 import main.*;
-import components.*;
+import utilities.*;
 import java.util.Scanner;
 
 public class AddNote implements Command {
@@ -28,7 +28,7 @@ public class AddNote implements Command {
         while(true){
             System.out.println("Do you want to add this note to an existing item? (yes/no): ");
             answer = temp.nextLine();
-            if (answer.toLowerCase() == "yes"){
+            if (answer.toLowerCase().equals("yes")){
                 System.out.println("Enter the title of the item you want to add this note to: ");
                 String existingComponentTitle = temp.nextLine();
                 try {
@@ -42,12 +42,11 @@ public class AddNote implements Command {
                     System.out.println("Notes cannot be added to.");
                 }
             }
-            else if (answer.toLowerCase() == "no"){
+            else if (answer.toLowerCase().equals("no")){
                 secretary.addNote(title, description);
                 break;
             }
         }
         System.out.println("Note added successfully.");
-        temp.close();
     }
 }

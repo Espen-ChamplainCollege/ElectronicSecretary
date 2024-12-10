@@ -6,13 +6,12 @@
 package commands;
 
 import main.*;
+import utilities.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
-import components.ComponentNotFoundException;
 
 public class AddReminder implements Command {
     ElectronicSecretary secretary;
@@ -36,11 +35,12 @@ public class AddReminder implements Command {
         LocalTime time = getTime(temp);
 
         String answer;
+        String buffer = temp.nextLine();
 
         while(true){
             System.out.println("Do you want to add this reminder to an existing item? (yes/no): ");
             answer = temp.nextLine();
-            if (answer.toLowerCase() == "yes"){
+            if (answer.toLowerCase().equals("yes")){
                 System.out.println("Enter the title of the item you want to add this reminder to: ");
                 String existingComponentTitle = temp.nextLine();
                 try {
@@ -54,19 +54,20 @@ public class AddReminder implements Command {
                     System.out.println("Notes cannot be added to.");
                 }
             }
-            else if (answer.toLowerCase() == "no"){
+            else if (answer.toLowerCase().equals("no")){
                 secretary.addReminder(title, description, date, time);
                 break;
             }
         }
         System.out.println("Reminder added successfully.");
-        temp.close();
     }
 
     protected LocalDate getDate(Scanner temp){
         boolean dayValid = false;
         int month = 0;
         int day = 0;
+
+        String buffer;
 
         while(true){
             try{
@@ -112,9 +113,11 @@ public class AddReminder implements Command {
                     }
                 }catch(InputMismatchException e){
                     System.out.println("ERROR! Invalid Input. Please input an integer");
+                    buffer = temp.nextLine();
                 }
             }catch(InputMismatchException e){
                 System.out.println("ERROR! Invalid Input. Please input an integer.");
+                buffer = temp.nextLine();
             }
 
             if(dayValid){
@@ -156,7 +159,8 @@ public class AddReminder implements Command {
                 LocalTime time = LocalTime.of(hour, minute);
                 return time;
             }catch(InputMismatchException e){
-                System.out.print("ERROR!. Invalid Input. Please input an integer.");
+                System.out.println("ERROR!. Invalid Input. Please input an integer.");
+                String buffer = temp.nextLine();
             }
 
         }

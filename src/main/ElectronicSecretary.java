@@ -7,23 +7,26 @@ package main;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
+import java.util.*;
 
 import components.*;
+import utilities.*;
 
 public class ElectronicSecretary {
-    List<SecretaryComponent> secretaryComponents;
+    List<SecretaryComponent> secretaryComponents = new ArrayList<SecretaryComponent>();
 
     private SecretaryComponent findComponent(String title) throws ComponentNotFoundException{
-        for (SecretaryComponent component : secretaryComponents){
-            if (component.getTitle().toLowerCase() == title.toLowerCase()){
-                return component;
-            }
-            try {
-                return component.findComponent(title);
-            }
-            catch (ComponentNotFoundException e){
-                continue;
+        if (!secretaryComponents.isEmpty()){
+            for (SecretaryComponent component : secretaryComponents){
+                if (component.getTitle().toLowerCase().equals(title.toLowerCase())){
+                    return component;
+                }
+                try {
+                    return component.findComponent(title);
+                }
+                catch (ComponentNotFoundException e){
+                    continue;
+                }
             }
         }
         throw new ComponentNotFoundException();

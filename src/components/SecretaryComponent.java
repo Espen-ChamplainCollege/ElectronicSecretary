@@ -5,6 +5,8 @@
 
 package components;
 
+import utilities.*;
+
 public abstract class SecretaryComponent{
     protected String title;
     protected String description;
