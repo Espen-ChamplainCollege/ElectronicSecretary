@@ -8,6 +8,7 @@ package components;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Iterator;
 
 public class MeetingComponent extends ReminderComponent{
     protected List<String> people;

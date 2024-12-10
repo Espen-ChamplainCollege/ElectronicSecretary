@@ -19,7 +19,7 @@ public abstract class SecretaryComponent{
         throw new UnsupportedOperationException("This Element does not have child nodes.");
     }
 
-    public void findComponent(SecretaryComponent element) {
+    public SecretaryComponent findComponent(String title) throws ComponentNotFoundException{
         throw new UnsupportedOperationException("This Element does not have child nodes.");
     }
 

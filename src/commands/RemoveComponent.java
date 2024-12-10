@@ -6,6 +6,7 @@
 package commands;
 
 import main.*;
+import components.*;
 import java.util.Scanner;
 
 public class RemoveComponent implements Command {
