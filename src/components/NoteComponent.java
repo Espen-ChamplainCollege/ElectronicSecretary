@@ -12,9 +12,13 @@ public class NoteComponent extends SecretaryComponent{
         this.description = description;
     }
 
-//    public String compose(){
+    public String compose(){
         /*
-         Figure out how to compose here
-         */
-//    }
+        Figure out how to compose here
+        */
+        String output = "";
+        output += "Note Title: " + this.title + "\n";
+        output += "Description: " + this.description + "\n";
+        return output;
+    }
 }

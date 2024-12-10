@@ -17,9 +17,21 @@ public class MeetingComponent extends ReminderComponent{
         this.people = people;
     }
 
-    /*
+    
     public String compose(){
-         Figure out how to compose here         
+        //Figure out how to compose here
+        String output = super.compose();
+        output += "People: ";
+        for(int i = 0; i < this.people.size(); i++){
+            output += this.people.get(i);
+            if(i + 1 < this.people.size()){
+                output += ", ";
+            }
+            else{
+                output += "\n";
+            }
+        }
+        return output;
     }
-    */
+    
 }
