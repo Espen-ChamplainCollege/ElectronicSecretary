@@ -37,7 +37,7 @@ public class AddReminder implements Command {
         secretary.addReminder(title, description, date, time);
     }
 
-    private LocalDate getDate(Scanner temp){
+    protected LocalDate getDate(Scanner temp){
         boolean dayValid = false;
         int month = 0;
         int day = 0;
@@ -107,7 +107,7 @@ public class AddReminder implements Command {
         return target;
     }
 
-    private LocalTime getTime(Scanner temp){
+    protected LocalTime getTime(Scanner temp){
         int hour = 0;
         int minute = 0;
 

@@ -36,9 +36,27 @@ public class ReminderComponent extends SecretaryComponent{
         System.out.println("Error. Component not found");
         return null;
     }
-//    public String compose(){
+    public String compose(){
         /*
          Figure out how to compose here
          */
-//    }
+        String output = "";
+        output += "Title: " + this.title + "\n";
+        output += "Description: " + this.description + "\n";
+        output += "Date: " + LocalDateToString() + "\n";
+        output += "Time: " + LocalTimeToString() + "\n";
+        return output;
+    }
+
+    protected String LocalDateToString(){
+        String dateString = this.date.toString();
+        String[] splitDate = dateString.split("-");
+        return splitDate[1] + "-" + splitDate[2] + "-" + splitDate[0];
+    }
+
+    protected String LocalTimeToString(){
+        String timeString = this.time.toString();
+        String[] splitTime = timeString.split(":");
+        return splitTime[0] + ":" + splitTime[1];
+    }
 }
