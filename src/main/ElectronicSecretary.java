@@ -104,10 +104,22 @@ public class ElectronicSecretary {
 
     }
 
-    public void printInfo(String untilDate){
+    public void printInfo(String title) throws ComponentNotFoundException{
+        try{
+            SecretaryComponent temp = findComponent(title);
+            System.out.println(temp.compose());
+        }catch(ComponentNotFoundException e){
+            throw e;
+        }
+    }
+
+    public void printAllInfo(){
         /*
          Sort elements by date, then print until date using compose()
          */
+        for(int i = 0; i < secretaryComponents.size(); i++){
+            System.out.println("--------------------");
+            System.out.println(secretaryComponents.get(i).compose());
+        }
     }
-
 }
