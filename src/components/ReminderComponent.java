@@ -58,7 +58,7 @@ public class ReminderComponent extends SecretaryComponent{
         string.append("Title: " + this.title + "\n");
         string.append("Description: " + this.description + "\n");
         string.append("Date: " + LocalDateToString() + "\n");
-        string.append("Time: " + LocalTimeToString() + "\n");
+        string.append("Time: " + LocalTimeToString() + "\n\n");
 
         for (SecretaryComponent component: components){
             string.append(component.compose());

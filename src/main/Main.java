@@ -7,7 +7,6 @@ package main;
 
 import java.util.Scanner;
 import commands.*;
-import utilities.*;
 
 public class Main {
     public static void main(String[] args){
@@ -25,6 +24,8 @@ public class Main {
         AddMeeting addMeeting = new AddMeeting(secretary);
         AddNote addNote = new AddNote(secretary);
         RemoveComponent removeComponent = new RemoveComponent(secretary);
+        PrintInfo printInfo = new PrintInfo(secretary);
+        PrintAllInfo printAll = new PrintAllInfo(secretary);
 
         /*
          Interface
@@ -71,7 +72,14 @@ public class Main {
                 case "5":
                     commandCenter.performCommand(removeComponent);
                     break;
+                case "6":
+                    commandCenter.performCommand(printInfo);
+                    break;
+                case "7":
+                    commandCenter.performCommand(printAll);
+                    break;
             }
         }
+        input.close();
     }
 }
